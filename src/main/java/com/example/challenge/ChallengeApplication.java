@@ -19,23 +19,23 @@ public class ChallengeApplication {
     public static void main(String[] args) {
         SpringApplication.run(ChallengeApplication.class, args);
     }
-//
-//    @Bean
-//    CommandLineRunner runner(EmployerService employerService) {
-//        return args -> {
-//            // read json and write to db
-//            ObjectMapper mapper = new ObjectMapper();
-//            TypeReference<List<Employer>> typeReference = new TypeReference<List<Employer>>(){};
-//
-//            InputStream inputStream = TypeReference.class.getResourceAsStream("/json/survey_3.json");
-//            try {
-//                List<Employer> employers = mapper.readValue(inputStream,typeReference);
-//                employerService.save(employers);
-//                System.out.println("Employers Saved!");
-//            } catch (IOException e){
-//                System.out.println("Unable to save employers: " + e.getMessage());
-//            }
-//        };
-//    }
+
+    @Bean
+    CommandLineRunner runner(EmployerService employerService) {
+       return args -> {
+            // read json and write to db
+            ObjectMapper mapper = new ObjectMapper();
+            TypeReference<List<Employer>> typeReference = new TypeReference<List<Employer>>(){};
+
+            InputStream inputStream = TypeReference.class.getResourceAsStream("/json/survey_3.json");
+            try {
+                List<Employer> employers = mapper.readValue(inputStream,typeReference);
+                employerService.save(employers);
+                System.out.println("Employers Saved!");
+            } catch (IOException e){
+                System.out.println("Unable to save employers: " + e.getMessage());
+            }
+        };
+    }
 
 }
